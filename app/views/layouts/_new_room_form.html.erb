@@ -1,0 +1,6 @@
+<%= form_with(model: @room, remote: true, class: "d-flex mt-6",
+              data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }
+    ) do |f| %>
+  <%= f.text_field :name, class: "w-full p-2 rounded border border-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-400", autocomplete: 'off' %>
+  <%= f.submit data: { disable_with: false }, class: 'mt-2 w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600 transition' %>
+<% end %>

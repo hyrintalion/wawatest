@@ -1,0 +1,28 @@
+<aside class="w-64 p-4 bg-pink-100 border-r border-pink-300 overflow-y-auto">
+  <h3 class="text-xl font-bold text-pink-800 mb-4">Hi <%= @current_user.display_name %></h3>
+  <h2 class="text-xl font-bold text-pink-800 mb-4">Users</h2>
+  <ul class="space-y-2" id="users">
+    <%= render @users %>
+    <%= turbo_stream_from "users" %>
+  </ul>
+  <br>
+  <h2 class="text-xl font-bold text-pink-800 mb-4">Chat Rooms</h2>
+  <ul class="space-y-2" id="rooms">
+    <%= render @rooms %>
+    <%= turbo_stream_from "rooms" %>
+  </ul>
+  <%= render partial: "layouts/new_room_form" %>
+</aside>
+
+<main class="flex-1 flex flex-col p-4 bg-white">
+  <% if @single_room %>
+    <h2 class="text-xl font-bold text-pink-800 mb-4"><%= @single_room.name %></h2>
+    <div class="flex-1 overflow-y-auto mb-4 space-y-2 pr-2" id="messages">
+      <%= render @messages %>
+      <%= turbo_stream_from @single_room %>
+    </div>
+    <%= render partial: 'layouts/new_message_form' %>
+  <% end %>
+</main>
+
+
